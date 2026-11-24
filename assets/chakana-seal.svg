@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320" role="img" aria-labelledby="seal-title">
+  <title id="seal-title">Sello institucional del Observatorio de Economía, Facultad de Ciencias Económicas UNPSJB</title>
+  <defs>
+    <path id="top-arc" d="M 48,160 A 112,112 0 1,1 272,160"/>
+    <path id="bottom-arc" d="M 38,164 A 122,122 0 0,0 282,164"/>
+  </defs>
+  <g transform="translate(92 92) scale(1.36)">
+    <path fill="#FF5A2D" fill-rule="evenodd" d="M40 0 H60 V20 H80 V40 H100 V60 H80 V80 H60 V100 H40 V80 H20 V60 H0 V40 H20 V20 H40 Z M50 40.5 A9.5 9.5 0 1 0 50 59.5 A9.5 9.5 0 1 0 50 40.5 Z"/>
+  </g>
+  <text fill="#C93B14" font-family="'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif" font-size="25" font-weight="800" letter-spacing="0.3">
+    <textPath href="#top-arc" startOffset="50%" text-anchor="middle">Observatorio de Economía</textPath>
+  </text>
+  <text fill="#14122B" font-family="'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="0.4">
+    <textPath href="#bottom-arc" startOffset="50%" text-anchor="middle">Facultad de Ciencias Económicas UNPSJB</textPath>
+  </text>
+</svg>

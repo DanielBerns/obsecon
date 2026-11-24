@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Observatorio de Economía y Recursos Naturales de la Patagonia | FCE · UNPSJB</title>
+  <meta name="description" content="Portal oficial del Observatorio de Economía y Recursos Naturales de la Patagonia, Facultad de Ciencias Económicas, Universidad Nacional de la Patagonia San Juan Bosco (UNPSJB). Acceso a Sur en Precios y herramientas públicas de datos económicos patagónicos.">
+  <link rel="canonical" href="https://obsecon.unp.edu.ar/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:url" content="https://obsecon.unp.edu.ar/">
+  <meta property="og:site_name" content="Observatorio de Economía — FCE UNPSJB">
+  <meta property="og:title" content="Observatorio de Economía y Recursos Naturales de la Patagonia | FCE · UNPSJB">
+  <meta property="og:description" content="El sur de la información. Plataformas públicas, relevamiento de precios, canastas básicas e indicadores económicos de la Patagonia.">
+
+  <!-- Favicon & Theme Color -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#7B4BDB">
+
+  <!-- Brand Typography (Bricolage Grotesque from visual identity manual + DM Sans pairing) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="main.js"></script>
+</head>
+<body id="inicio">
+  <a href="#contenido-principal" class="skip-link visually-hidden">Saltar al contenido principal</a>
+
+  <!-- Site Header & Responsive Popover Navigation -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="#inicio">
+        <svg class="brand-mark" viewBox="0 0 100 100" width="40" height="40" aria-hidden="true">
+          <path fill="currentColor" fill-rule="evenodd" d="M40 0 H60 V20 H80 V40 H100 V60 H80 V80 H60 V100 H40 V80 H20 V60 H0 V40 H20 V20 H40 Z M50 40.5 A9.5 9.5 0 1 0 50 59.5 A9.5 9.5 0 1 0 50 40.5 Z"/>
+        </svg>
+        <span class="brand-wordmark">
+          <span class="brand-name">Observatorio de Economía</span>
+          <span class="brand-faculty">Facultad de Ciencias Económicas UNPSJB</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Principal">
+        <button
+          class="menu-button"
+          type="button"
+          popovertarget="site-menu"
+          popovertargetaction="toggle"
+          aria-controls="site-menu"
+        >
+          <svg class="menu-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2.2H3V6zm0 4.9h18v2.2H3v-2.2zm0 4.9h18V18H3v-2.2z"/>
+          </svg>
+          <span>Menú</span>
+        </button>
+
+        <ul id="site-menu" class="site-menu" popover="auto">
+          <li><a href="#inicio" aria-current="page">Inicio</a></li>
+          <li><a href="#herramientas">Herramientas</a></li>
+          <li><a href="#ejes">Ejes de estudio</a></li>
+          <li><a href="#institucional">Institucional</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li>
+            <a
+              class="nav-cta"
+              href="https://surenprecios.unp.edu.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sur en Precios
+              <span aria-hidden="true">↗</span>
+              <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Band: Violet canvas + giant Vermilion Chakana (Page 3 of Visual Identity PDF) -->
+    <section class="hero-band">
+      <div class="hero-chakana-art" aria-hidden="true">
+        <svg viewBox="0 0 420 520" fill="none">
+          <!-- Upper outlined Chakana echo -->
+          <path
+            d="M320 -55 H390 V15 H460 V85 H530 V155 H460 V225 H390 V295 H320 V225 H250 V155 H180 V85 H250 V15 H320 Z"
+            stroke="#FF5A2D"
+            stroke-width="10"
+          />
+          <!-- Main solid Vermilion Chakana -->
+          <path
+            fill="#FF5A2D"
+            fill-rule="evenodd"
+            d="M270 165 H360 V255 H450 V345 H540 V435 H450 V525 H360 V615 H270 V525 H180 V435 H90 V345 H180 V255 H270 Z M315 352 A38 38 0 1 0 315 428 A38 38 0 1 0 315 352 Z"
+          />
+          <!-- Lower outlined Chakana echo -->
+          <path
+            d="M80 435 H150 V505 H220 V575 H150 V645 H80 V575 H10 V505 H80 Z"
+            stroke="#FF5A2D"
+            stroke-width="10"
+          />
+        </svg>
+      </div>
+
+      <div class="container hero-content">
+        <p class="hero-eyebrow">
+          <span class="pill pill-yellow">FCE · UNPSJB · Patagonia Argentina</span>
+        </p>
+
+        <h1 id="contenido-principal" tabindex="-1" class="hero-title">
+          El sur de<br>la información.
+        </h1>
+
+        <p class="hero-institution">
+          Observatorio de Economía y Recursos Naturales de la Patagonia
+        </p>
+
+        <p class="hero-lead">
+          Espacio técnico y académico de la <strong>Facultad de Ciencias Económicas</strong> de la
+          <strong>Universidad Nacional de la Patagonia San Juan Bosco</strong>, dedicado al relevamiento
+          continuo, análisis cuantitativo y difusión abierta de indicadores socioeconómicos regionales.
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="btn btn-yellow"
+            href="https://surenprecios.unp.edu.ar"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Explorar Sur en Precios
+            <span aria-hidden="true">↗</span>
+            <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+          </a>
+          <a class="btn btn-ghost-light" href="#herramientas">
+            Ver herramientas públicas
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <p class="hero-origin">
+          <svg class="pin-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="currentColor" fill-rule="evenodd" d="M12 2C7.58 2 4 5.58 4 10c0 5.75 7.12 11.4 7.42 11.63a.95.95 0 0 0 1.16 0C12.88 21.4 20 15.75 20 10c0-4.42-3.58-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+          </svg>
+          <span><strong>Hecho en Comodoro Rivadavia</strong> · Chubut, Argentina</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Tools & Platforms Section (Warm Cream Canvas + Cobalt Spotlight + 3 Tool Cards) -->
+    <section id="herramientas" class="section section-cream">
+      <!-- Subtle four-corner stepped motif echoing Page 1 -->
+      <div class="corner-step corner-step--tl" aria-hidden="true"></div>
+      <div class="corner-step corner-step--tr" aria-hidden="true"></div>
+
+      <div class="container">
+        <header class="section-header">
+          <span class="pill pill-ink">Ecosistema Digital · Datos Abiertos</span>
+          <h2 class="section-title">
+            Plataformas y <span class="hl-box hl-blue">herramientas</span> del Observatorio
+          </h2>
+          <p class="section-desc">
+            Aplicaciones públicas desarrolladas por el equipo del Observatorio de Economía (FCE · UNPSJB)
+            para facilitar el seguimiento de precios, canastas e indicadores socioeconómicos en la Patagonia.
+          </p>
+        </header>
+
+        <!-- Flagship Platform: Sur en Precios (Cobalt Blue + Yellow accent inspired by Page 4) -->
+        <article class="spotlight-card">
+          <div class="spotlight-chakana" aria-hidden="true">
+            <svg viewBox="0 0 340 340" fill="none">
+              <path
+                d="M235 -30 H295 V30 H355 V90 H295 V150 H235 V90 H175 V30 H235 Z"
+                stroke="#7B4BDB"
+                stroke-width="8"
+              />
+              <path
+                fill="#7B4BDB"
+                fill-rule="evenodd"
+                d="M170 110 H240 V180 H310 V250 H240 V320 H170 V250 H100 V180 H170 Z M205 190 A25 25 0 1 0 205 240 A25 25 0 1 0 205 190 Z"
+              />
+            </svg>
+          </div>
+
+          <div class="spotlight-body">
+            <div class="spotlight-meta">
+              <span class="pill pill-yellow">Plataforma Principal</span>
+              <span class="spotlight-domain">surenprecios.unp.edu.ar</span>
+            </div>
+
+            <h3 class="spotlight-title">
+              Sur en <span class="text-yellow">Precios</span>
+            </h3>
+
+            <p class="spotlight-desc">
+              Plataforma pública de monitoreo sistemático, análisis estadístico y optimización inteligente
+              de precios de supermercados para la Patagonia. Integra diariamente datos abiertos oficiales
+              del sistema SEPA (Precios Claros) con precios de referencia por media geométrica, canastas
+              desacopladas por código EAN y comparador de ahorro entre cadenas locales.
+            </p>
+
+            <ul class="feature-tags" role="list">
+              <li>Catálogo y precios por unidad</li>
+              <li>Media geométrica oficial SEPA</li>
+              <li>Canastas personalizadas</li>
+              <li>Optimizador de compras</li>
+            </ul>
+
+            <div class="spotlight-actions">
+              <a
+                class="btn btn-yellow"
+                href="https://surenprecios.unp.edu.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ingresar a Sur en Precios
+                <span aria-hidden="true">↗</span>
+                <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+              <a
+                class="btn btn-ghost-light"
+                href="https://surenprecios.unp.edu.ar/#herramientas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver sección herramientas en Sur en Precios
+                <span aria-hidden="true">↗</span>
+                <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Secondary Ecosystem Tools (All links listed at https://surenprecios.unp.edu.ar/#herramientas) -->
+        <div class="sub-section-head">
+          <h3 class="sub-section-title">Otras herramientas desarrolladas por el grupo</h3>
+          <p class="sub-section-desc">
+            Acceso directo a las plataformas complementarias publicadas en
+            <a
+              class="inline-link"
+              href="https://surenprecios.unp.edu.ar/#herramientas"
+              target="_blank"
+              rel="noopener noreferrer"
+            >surenprecios.unp.edu.ar/#herramientas<span class="visually-hidden"> (se abre en una nueva pestaña)</span></a>.
+          </p>
+        </div>
+
+        <div class="tools-grid">
+          <!-- Tool 1: Buscador de Productos -->
+          <article class="card tool-card tool-card--orange">
+            <svg class="card-banner" viewBox="0 0 360 120" width="360" height="120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="360" height="120" fill="#FF5A2D"/>
+              <g opacity="0.22" fill="none" stroke="#FFF4E6" stroke-width="3">
+                <path d="M25 15 H45 V35 H65 V55 H45 V75 H25 V55 H5 V35 H25 Z"/>
+                <path d="M125 45 H145 V65 H165 V85 H145 V105 H125 V85 H105 V65 H125 Z"/>
+              </g>
+              <path
+                fill="#FFC93C"
+                fill-rule="evenodd"
+                d="M275 18 H301 V44 H327 V70 H301 V96 H275 V70 H249 V44 H275 Z M288 47 A10 10 0 1 0 288 67 A10 10 0 1 0 288 47 Z"
+              />
+              <!-- Minimal search magnifier motif -->
+              <circle cx="52" cy="60" r="22" fill="#FFF4E6"/>
+              <circle cx="50" cy="58" r="8" fill="none" stroke="#14122B" stroke-width="3.5"/>
+              <line x1="56" y1="64" x2="63" y2="71" stroke="#14122B" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+
+            <header>
+              <span class="pill pill-orange-soft">Web App · Catálogo</span>
+              <h3>
+                <a
+                  class="card-link"
+                  href="https://buscador-productos.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buscador de Productos
+                  <span class="visually-hidden"> — Acceder al buscador (se abre en una nueva pestaña)</span>
+                </a>
+              </h3>
+            </header>
+
+            <p>
+              Plataforma web de búsqueda ágil orientada a la localización inmediata de artículos de
+              consumo masivo, comparación de precios e información clara de productos en comercios
+              de la región.
+            </p>
+
+            <footer>
+              <span class="card-cta" aria-hidden="true">Acceder al Buscador ↗</span>
+              <span class="card-host">buscador-productos.vercel.app</span>
+            </footer>
+          </article>
+
+          <!-- Tool 2: Monitor San Jorge (OEFCE) -->
+          <article class="card tool-card tool-card--green">
+            <svg class="card-banner" viewBox="0 0 360 120" width="360" height="120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="360" height="120" fill="#8CC63F"/>
+              <!-- Geometric bar chart motif inspired by Page 7 -->
+              <rect x="242" y="64" width="16" height="40" rx="3" fill="#2540D9"/>
+              <rect x="262" y="42" width="16" height="62" rx="3" fill="#FF5A2D"/>
+              <rect x="284" y="54" width="16" height="50" rx="3" fill="#2540D9"/>
+              <rect x="304" y="24" width="16" height="80" rx="3" fill="#FF5A2D"/>
+              <rect x="326" y="48" width="16" height="56" rx="3" fill="#14122B"/>
+              <circle cx="52" cy="60" r="22" fill="#FFF4E6"/>
+              <path fill="#14122B" d="M42 68V56h4v12h-4Zm7 0V49h4v19h-4Zm7 0V53h4v15h-4Z"/>
+            </svg>
+
+            <header>
+              <span class="pill pill-green-soft">Streamlit · Tablero Analítico</span>
+              <h3>
+                <a
+                  class="card-link"
+                  href="https://oefce-msj.streamlit.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Monitor San Jorge (OEFCE)
+                  <span class="visually-hidden"> — Explorar Monitor San Jorge (se abre en una nueva pestaña)</span>
+                </a>
+              </h3>
+            </header>
+
+            <p>
+              Tablero de control interactivo con indicadores socioeconómicos, series temporales,
+              actividad regional y relevamientos de la cuenca del Golfo San Jorge, desarrollado con
+              Streamlit.
+            </p>
+
+            <footer>
+              <span class="card-cta" aria-hidden="true">Explorar Monitor San Jorge ↗</span>
+              <span class="card-host">oefce-msj.streamlit.app</span>
+            </footer>
+          </article>
+
+          <!-- Tool 3: Buscador de Materiales -->
+          <article class="card tool-card tool-card--yellow">
+            <svg class="card-banner" viewBox="0 0 360 120" width="360" height="120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="360" height="120" fill="#FFC93C"/>
+              <!-- Stepped construction blocks echoing Page 8 -->
+              <path fill="#7B4BDB" d="M260 120 V88 H292 V56 H324 V24 H360 V120 Z"/>
+              <circle cx="342" cy="102" r="9" fill="#FFF4E6"/>
+              <circle cx="52" cy="60" r="22" fill="#14122B"/>
+              <path fill="#FFF4E6" d="M40 66h10v-6H40v6Zm12 0h12v-6H52v6Zm-12-8h15v-6H40v6Zm17 0h7v-6h-7v6Z"/>
+            </svg>
+
+            <header>
+              <span class="pill pill-yellow-soft">Insumos y Construcción</span>
+              <h3>
+                <a
+                  class="card-link"
+                  href="https://buscador-productos.vercel.app/materiales/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Buscador de Materiales
+                  <span class="visually-hidden"> — Consultar Materiales (se abre en una nueva pestaña)</span>
+                </a>
+              </h3>
+            </header>
+
+            <p>
+              Herramienta especializada destinada al relevamiento, seguimiento y comparación de
+              precios en el sector de la construcción, corralones y proveedores de insumos
+              patagónicos.
+            </p>
+
+            <footer>
+              <span class="card-cta" aria-hidden="true">Consultar Materiales ↗</span>
+              <span class="card-host">buscador-productos.vercel.app/materiales</span>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research & Monitoring Axes (Color-blocked editorial cards echoing Pages 5, 6, 7, 8) -->
+    <section id="ejes" class="section section-tinted">
+      <div class="container">
+        <header class="section-header">
+          <span class="pill pill-violet">Informes y Relevamientos</span>
+          <h2 class="section-title">
+            Líneas de <span class="hl-box hl-orange">relevamiento</span> y análisis
+          </h2>
+          <p class="section-desc">
+            Producción periódica de estadísticas propias y análisis técnico con rigor metodológico
+            para comprender la evolución del costo de vida y la estructura productiva patagónica.
+          </p>
+        </header>
+
+        <div class="axes-grid">
+          <article class="axis-card axis-card--yellow">
+            <span class="axis-badge">Costo de vida</span>
+            <h3>Canasta Básica Total y Alimentaria</h3>
+            <p>
+              Relevamiento mensual del valor de la Canasta Básica Alimentaria (CBA) y la Canasta
+              Básica Total (CBT) por adulto equivalente y hogares tipo en Comodoro Rivadavia y la
+              región.
+            </p>
+          </article>
+
+          <article class="axis-card axis-card--green">
+            <span class="axis-badge">Relevamiento diferencial</span>
+            <h3>Canasta Básica sin TACC</h3>
+            <p>
+              Seguimiento específico de la Canasta Básica Total y Alimentaria libre de gluten,
+              visibilizando la brecha de costos que enfrentan las personas con celiaquía en la
+              Patagonia.
+            </p>
+          </article>
+
+          <article class="axis-card axis-card--orange">
+            <span class="axis-badge">Indicadores sociales</span>
+            <h3>Pobreza, indigencia e ingresos</h3>
+            <p>
+              Monitoreo semestral de personas y hogares bajo las líneas de pobreza e indigencia en
+              el aglomerado Comodoro Rivadavia–Rada Tilly, junto al estudio del salario real y el
+              mercado laboral.
+            </p>
+          </article>
+
+          <article class="axis-card axis-card--blue">
+            <span class="axis-badge">Estructura productiva</span>
+            <h3>Recursos naturales y economía regional</h3>
+            <p>
+              Análisis cuantitativo de hidrocarburos, transición energética, pesca, construcción,
+              comercio y cadenas de valor estratégicas de la cuenca del Golfo San Jorge y la
+              Patagonia austral.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Institutional Section (Page 2 Circular Seal + 3 Institutional Pillars) -->
+    <section id="institucional" class="section section-cream">
+      <div class="container">
+        <div class="institutional-intro">
+          <div class="institutional-intro-text">
+            <span class="pill pill-ink">Respaldo Académico</span>
+            <h2 class="section-title">
+              Marco <span class="hl-box hl-violet">institucional</span> y académico
+            </h2>
+            <p class="section-desc section-desc--left">
+              Una iniciativa gestada desde la universidad pública nacional, orientada a la
+              investigación socioeconómica, la transparencia metodológica y la soberanía
+              informativa al servicio de la comunidad patagónica.
+            </p>
+          </div>
+          <figure class="seal-figure">
+            <img
+              src="assets/chakana-seal.svg"
+              alt="Sello circular del Observatorio de Economía, Facultad de Ciencias Económicas UNPSJB"
+              width="210"
+              height="210"
+              loading="lazy"
+            >
+          </figure>
+        </div>
+
+        <div class="inst-grid">
+          <article class="inst-card">
+            <span class="inst-kicker">Equipo de Investigación y Desarrollo</span>
+            <h3>Observatorio de Economía y Recursos Naturales de la Patagonia</h3>
+            <p>
+              Espacio técnico especializado en el relevamiento continuo, análisis cuantitativo y
+              difusión de variables socioeconómicas, precios al consumidor, canastas básicas,
+              hidrocarburos, pesca, energía y actividad comercial de la región.
+            </p>
+            <dl class="inst-facts">
+              <div>
+                <dt>Sigla</dt>
+                <dd>OERNP · Observatorio de Economía (FCE)</dd>
+              </div>
+              <div>
+                <dt>Portal</dt>
+                <dd>obsecon.unp.edu.ar</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="inst-card">
+            <span class="inst-kicker">Unidad Académica Responsable</span>
+            <h3>Facultad de Ciencias Económicas</h3>
+            <p>
+              Institución formadora de excelencia en ciencias económicas, administración y finanzas
+              en la Patagonia. A través de sus carreras de grado y posgrado, institutos y equipos de
+              extensión, lidera el análisis de la estructura económica regional y el impacto en los
+              hogares.
+            </p>
+            <dl class="inst-facts">
+              <div>
+                <dt>Sede</dt>
+                <dd>Edificio de Aulas, Km 4, Comodoro Rivadavia</dd>
+              </div>
+              <div>
+                <dt>Áreas</dt>
+                <dd>Economía, Administración, Finanzas y Desarrollo Regional</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="inst-card">
+            <span class="inst-kicker">Universidad Pública Nacional</span>
+            <h3>Universidad Nacional de la Patagonia San Juan Bosco</h3>
+            <p>
+              Principal casa de altos estudios de la Patagonia central y austral, con sede central en
+              Comodoro Rivadavia y sedes en Trelew, Puerto Madryn y Esquel. Comprometida con la
+              educación pública, la investigación científica y la transferencia hacia la comunidad.
+            </p>
+            <dl class="inst-facts">
+              <div>
+                <dt>Sede central</dt>
+                <dd>Ciudad Universitaria, Ruta Nacional 3 Km 4, Chubut</dd>
+              </div>
+              <div>
+                <dt>Sitio oficial</dt>
+                <dd>
+                  <a
+                    class="inline-link"
+                    href="https://www.unp.edu.ar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    www.unp.edu.ar
+                    <span aria-hidden="true">↗</span>
+                    <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+
+        <aside class="collab-banner" aria-labelledby="articulacion-titulo">
+          <div class="collab-copy">
+            <h3 id="articulacion-titulo">Articulación interdisciplinaria en la UNPSJB</h3>
+            <p>
+              El ecosistema digital del Observatorio promueve el trabajo colaborativo junto a la
+              <strong>Facultad de Ingeniería</strong>, el
+              <strong>Grupo de Investigación en Procesamiento de la Información y Sensores</strong> y
+              la <strong>Facultad de Humanidades y Ciencias Sociales</strong> de la UNPSJB.
+            </p>
+          </div>
+          <a
+            class="btn btn-blue"
+            href="https://surenprecios.unp.edu.ar/#institucional"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver marco en Sur en Precios
+            <span aria-hidden="true">↗</span>
+            <span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer: Deep Ink (#14122B) with Stepped Corner Accents -->
+  <footer id="contacto" class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-lockup">
+            <svg class="brand-mark" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+              <path fill="#FF5A2D" fill-rule="evenodd" d="M40 0 H60 V20 H80 V40 H100 V60 H80 V80 H60 V100 H40 V80 H20 V60 H0 V40 H20 V20 H40 Z M50 40.5 A9.5 9.5 0 1 0 50 59.5 A9.5 9.5 0 1 0 50 40.5 Z"/>
+            </svg>
+            <div class="brand-wordmark">
+              <span class="brand-name">Observatorio de Economía</span>
+              <span class="brand-faculty">Facultad de Ciencias Económicas UNPSJB</span>
+            </div>
+          </div>
+          <p class="footer-mission">
+            Observatorio de Economía y Recursos Naturales de la Patagonia. Información pública,
+            metodología abierta y herramientas digitales al servicio de la comunidad.
+          </p>
+          <p class="footer-origin">
+            <svg class="pin-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="currentColor" fill-rule="evenodd" d="M12 2C7.58 2 4 5.58 4 10c0 5.75 7.12 11.4 7.42 11.63a.95.95 0 0 0 1.16 0C12.88 21.4 20 15.75 20 10c0-4.42-3.58-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+            </svg>
+            <span>Hecho en Comodoro Rivadavia · Chubut</span>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="footer-heading">Herramientas</h2>
+          <ul class="footer-links" role="list">
+            <li>
+              <a href="https://surenprecios.unp.edu.ar" target="_blank" rel="noopener noreferrer">
+                Sur en Precios <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://buscador-productos.vercel.app/" target="_blank" rel="noopener noreferrer">
+                Buscador de Productos <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://oefce-msj.streamlit.app/" target="_blank" rel="noopener noreferrer">
+                Monitor San Jorge (OEFCE) <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://buscador-productos.vercel.app/materiales/" target="_blank" rel="noopener noreferrer">
+                Buscador de Materiales <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="footer-heading">Institucional</h2>
+          <ul class="footer-links" role="list">
+            <li><a href="#herramientas">Ecosistema digital</a></li>
+            <li><a href="#ejes">Líneas de relevamiento</a></li>
+            <li><a href="#institucional">Marco académico</a></li>
+            <li>
+              <a href="https://www.unp.edu.ar" target="_blank" rel="noopener noreferrer">
+                UNPSJB Oficial <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h2 class="footer-heading">Sede y Contacto</h2>
+          <address class="footer-address">
+            <p>
+              Ciudad Universitaria, Ruta Nacional 3 Km 4<br>
+              Comodoro Rivadavia, Chubut, Patagonia Argentina
+            </p>
+            <ul class="footer-links" role="list">
+              <li>
+                <a href="mailto:observatorioFCE@gmail.com">observatorioFCE@gmail.com</a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/observatoriofce.unpsjb" target="_blank" rel="noopener noreferrer">
+                  Instagram @observatoriofce.unpsjb <span aria-hidden="true">↗</span><span class="visually-hidden"> (se abre en una nueva pestaña)</span>
+                </a>
+              </li>
+              <li>
+                <a href="tel:+542975372525">(0297) 537-2525</a>
+              </li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 Observatorio de Economía y Recursos Naturales de la Patagonia —
+          Facultad de Ciencias Económicas, Universidad Nacional de la Patagonia San Juan Bosco.
+        </p>
+        <p class="footer-domain">https://obsecon.unp.edu.ar</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

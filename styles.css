@@ -1,0 +1,1358 @@
+@layer reset, tokens, base, layout, components, utilities;
+
+/* ==========================================================================
+   1. Targeted Reset (no global * reset, per modern CSS cascade guidance)
+   ========================================================================== */
+@layer reset {
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body,
+  header,
+  nav,
+  main,
+  section,
+  article,
+  aside,
+  footer,
+  div,
+  figure,
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd,
+  h1,
+  h2,
+  h3,
+  p,
+  address,
+  a,
+  button,
+  img,
+  svg {
+    box-sizing: border-box;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  p,
+  figure,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  address {
+    font-style: normal;
+  }
+}
+
+/* ==========================================================================
+   2. Design Tokens (Extracted directly from Identidad Visual PDF)
+   ========================================================================== */
+@layer tokens {
+  :root {
+    /* Tier 1: Brand Palette (PDF exact hex values) */
+    --brand-cream: #FFF4E6;
+    --brand-white: #FFFFFF;
+    --brand-ink: #14122B;
+    --brand-ink-muted: #3E3B5C;
+    --brand-orange: #FF5A2D;
+    --brand-orange-text: #C93B14;
+    --brand-blue: #2540D9;
+    --brand-blue-deep: #1B31AD;
+    --brand-violet: #7B4BDB;
+    --brand-violet-deep: #5B32B8;
+    --brand-yellow: #FFC93C;
+    --brand-green: #8CC63F;
+    --brand-green-text: #2E6114;
+
+    /* Tier 2: Semantic Tokens */
+    --surface-page: var(--brand-cream);
+    --surface-card: var(--brand-white);
+    --surface-tinted: color-mix(in oklab, var(--brand-cream) 86%, var(--brand-yellow) 14%);
+    --surface-hero: var(--brand-violet);
+    --surface-spotlight: var(--brand-blue);
+    --surface-footer: var(--brand-ink);
+
+    --text-primary: var(--brand-ink);
+    --text-muted: var(--brand-ink-muted);
+    --text-on-dark: var(--brand-cream);
+    --text-on-dark-muted: color-mix(in oklab, var(--brand-cream) 82%, transparent);
+
+    --border-strong: var(--brand-ink);
+    --border-subtle: color-mix(in oklab, var(--brand-ink) 16%, transparent);
+
+    /* Typography */
+    --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "DM Sans", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+
+    /* Radii & Spacing */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-pill: 999px;
+
+    --container-max: 74rem;
+    --gutter: clamp(1rem, 3vw, 2rem);
+    --section-space: clamp(3.5rem, 6vw, 5.5rem);
+
+    /* Elevation (Crisp editorial offset shadow echoing geometric identity) */
+    --shadow-card: 0 4px 0 var(--brand-ink);
+    --shadow-card-hover: 0 8px 0 var(--brand-ink);
+    --shadow-popover: 0 18px 40px color-mix(in oklab, var(--brand-ink) 24%, transparent);
+
+    color-scheme: light;
+    accent-color: var(--brand-blue);
+  }
+}
+
+/* ==========================================================================
+   3. Base Typography & Focus Rules
+   ========================================================================== */
+@layer base {
+  body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--surface-page);
+    text-align: start;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  :where(a:any-link) {
+    color: var(--brand-blue);
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.1em;
+  }
+
+  :where(a:any-link, button, [tabindex="-1"]):focus-visible {
+    outline: 3px solid var(--brand-orange);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--brand-yellow);
+    color: var(--brand-ink);
+  }
+}
+
+/* ==========================================================================
+   4. Layout Primitives
+   ========================================================================== */
+@layer layout {
+  .container {
+    inline-size: min(100% - (var(--gutter) * 2), var(--container-max));
+    margin-inline: auto;
+  }
+
+  .section {
+    position: relative;
+    padding-block: var(--section-space);
+    scroll-margin-block-start: 4.5rem;
+  }
+
+  .section-cream {
+    background-color: var(--surface-page);
+  }
+
+  .section-tinted {
+    background-color: var(--surface-tinted);
+    border-block: 2px solid var(--border-strong);
+  }
+}
+
+/* ==========================================================================
+   5. Components
+   ========================================================================== */
+@layer components {
+  /* Skip Link */
+  .skip-link {
+    &:focus-visible {
+      position: fixed;
+      inset-block-start: 0.75rem;
+      inset-inline-start: 0.75rem;
+      z-index: 1000;
+      padding-block: 0.75rem;
+      padding-inline: 1.25rem;
+      border-radius: var(--radius-pill);
+      background-color: var(--brand-yellow);
+      color: var(--brand-ink);
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid var(--brand-ink);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Site Header & Responsive Popover Navbar (modern-web-guidance: navbar)
+     ------------------------------------------------------------------------ */
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 100;
+    background-color: color-mix(in oklab, var(--brand-cream) 94%, transparent);
+    backdrop-filter: blur(10px);
+    border-block-end: 2px solid var(--border-strong);
+
+    .header-inner {
+      inline-size: min(100% - (var(--gutter) * 2), var(--container-max));
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-block: 0.75rem;
+    }
+
+    /* Keep natural width measurable for JS width detection */
+    .header-inner > * {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .site-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--brand-ink);
+      text-decoration: none;
+      min-block-size: 2.75rem;
+
+      .brand-mark {
+        inline-size: clamp(2rem, 1.8rem + 1vw, 2.5rem);
+        block-size: clamp(2rem, 1.8rem + 1vw, 2.5rem);
+        color: var(--brand-orange);
+        flex-shrink: 0;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover .brand-mark {
+        transform: rotate(90deg);
+      }
+    }
+
+    .brand-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(0.88rem, 0.78rem + 0.45vw, 1.15rem);
+      color: var(--brand-orange-text);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-faculty {
+      font-size: clamp(0.66rem, 0.58rem + 0.3vw, 0.78rem);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--brand-ink);
+    }
+
+    .menu-button {
+      anchor-name: --menu-button;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-block-size: 2.75rem;
+      padding-block: 0.45rem;
+      padding-inline: 0.85rem;
+      background-color: var(--brand-ink);
+      color: var(--brand-cream);
+      border: 2px solid var(--brand-ink);
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+
+      &:hover {
+        background-color: var(--brand-blue);
+        border-color: var(--brand-blue);
+      }
+    }
+
+    .site-menu {
+      position: fixed;
+      inset: auto;
+      /* Fallback offset before anchor() for browsers without Anchor Positioning */
+      inset-block-start: 4.5rem;
+      inset-block-start: anchor(--menu-button bottom);
+      inset-inline-end: var(--gutter);
+      inline-size: min(84dvw, 21rem);
+      max-inline-size: calc(100dvw - 2rem);
+      block-size: fit-content;
+      max-block-size: calc(100dvh - 6rem);
+      margin: 0;
+      margin-block-start: 0.5rem;
+      padding: 0.85rem;
+      list-style: none;
+      background-color: var(--brand-cream);
+      border: 2px solid var(--brand-ink);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-popover);
+      overflow: auto;
+      opacity: 0;
+      translate: 0 -0.4rem;
+      transition:
+        opacity 0.18s ease,
+        translate 0.18s ease,
+        display 0.18s ease,
+        overlay 0.18s ease;
+      transition-behavior: allow-discrete;
+
+      &:is(:popover-open, .\:popover-open) {
+        display: grid;
+        gap: 0.35rem;
+        opacity: 1;
+        translate: 0 0;
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 -0.4rem;
+        }
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        inline-size: 100%;
+        min-block-size: 2.75rem;
+        padding-block: 0.5rem;
+        padding-inline: 0.85rem;
+        border-radius: var(--radius-sm);
+        color: var(--brand-ink);
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: background-color 0.15s ease, color 0.15s ease;
+
+        &:hover {
+          background-color: color-mix(in oklab, var(--brand-yellow) 45%, var(--brand-cream));
+        }
+
+        &[aria-current="page"] {
+          font-weight: 800;
+          background-color: color-mix(in oklab, var(--brand-yellow) 55%, var(--brand-cream));
+          border-inline-start: 4px solid var(--brand-blue);
+        }
+
+        &.nav-cta {
+          margin-block-start: 0.35rem;
+          justify-content: center;
+          background-color: var(--brand-blue);
+          color: var(--brand-cream);
+          border: 2px solid var(--brand-ink);
+          border-radius: var(--radius-pill);
+          font-weight: 700;
+
+          &:hover {
+            background-color: var(--brand-blue-deep);
+            color: var(--brand-cream);
+          }
+        }
+      }
+    }
+
+    &.is-wide {
+      .menu-button {
+        display: none;
+      }
+
+      .site-menu {
+        position: static;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        inline-size: auto;
+        max-inline-size: none;
+        block-size: auto;
+        max-block-size: none;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        opacity: 1;
+        translate: none;
+        transition: none;
+
+        &::backdrop {
+          display: none;
+        }
+
+        a {
+          inline-size: auto;
+          padding-block: 0.45rem;
+          padding-inline: 0.75rem;
+
+          &[aria-current="page"] {
+            background-color: transparent;
+            border-inline-start: 0;
+            border-block-end: 3px solid var(--brand-blue);
+            border-radius: 0;
+          }
+
+          &.nav-cta {
+            margin-block-start: 0;
+            margin-inline-start: 0.5rem;
+            padding-block: 0.5rem;
+            padding-inline: 1.1rem;
+          }
+        }
+      }
+    }
+
+    &.is-measuring,
+    &.is-measuring .site-menu {
+      transition: none !important;
+    }
+  }
+
+  /* Popover polyfill pre-load guard (modern-web-guidance: navbar) */
+  @supports not selector(:popover-open) {
+    [popover]:not(.\:popover-open) {
+      display: none;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Pills, Highlights & Buttons (Pages 5, 6, 7, 8 of Visual Identity PDF)
+     ------------------------------------------------------------------------ */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-block: 0.3rem;
+    padding-inline: 0.9rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .pill-yellow {
+    background-color: var(--brand-yellow);
+    color: var(--brand-ink);
+  }
+
+  .pill-ink {
+    background-color: var(--brand-ink);
+    color: var(--brand-cream);
+  }
+
+  .pill-violet {
+    background-color: var(--brand-violet);
+    color: var(--brand-cream);
+  }
+
+  .pill-orange-soft {
+    background-color: var(--brand-orange);
+    color: var(--brand-ink);
+  }
+
+  .pill-green-soft {
+    background-color: var(--brand-green);
+    color: var(--brand-ink);
+  }
+
+  .pill-yellow-soft {
+    background-color: var(--brand-yellow);
+    color: var(--brand-ink);
+  }
+
+  /* Highlighted keyword blocks (Page 7 style) */
+  .hl-box {
+    display: inline-block;
+    padding-block: 0.04em;
+    padding-inline: 0.28em;
+    border-radius: 0.28em;
+    box-decoration-break: clone;
+  }
+
+  .hl-blue {
+    background-color: var(--brand-blue);
+    color: var(--brand-cream);
+  }
+
+  .hl-orange {
+    background-color: var(--brand-orange);
+    color: var(--brand-ink);
+  }
+
+  .hl-violet {
+    background-color: var(--brand-violet);
+    color: var(--brand-cream);
+  }
+
+  .text-yellow {
+    color: var(--brand-yellow);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-block-size: 3rem;
+    padding-block: 0.7rem;
+    padding-inline: 1.45rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-decoration: none;
+    border: 2px solid var(--brand-ink);
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 var(--brand-ink);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  .btn-yellow {
+    background-color: var(--brand-yellow);
+    color: var(--brand-ink);
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--brand-yellow) 88%, var(--brand-white));
+    }
+  }
+
+  .btn-blue {
+    background-color: var(--brand-blue);
+    color: var(--brand-cream);
+
+    &:hover {
+      background-color: var(--brand-blue-deep);
+    }
+  }
+
+  .btn-ghost-light {
+    background-color: transparent;
+    color: var(--brand-cream);
+    border-color: var(--brand-cream);
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--brand-cream) 14%, transparent);
+      box-shadow: 0 4px 0 var(--brand-cream);
+    }
+  }
+
+  .inline-link {
+    font-weight: 700;
+    color: var(--brand-blue);
+
+    &:hover {
+      color: var(--brand-violet-deep);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Hero Band (Page 3: Violet canvas + subtle tiled Chakanas + Vermilion art)
+     ------------------------------------------------------------------------ */
+  .hero-band {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-hero);
+    /* Subtle tiled Chakana outline pattern inspired by Pages 3-6 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpath fill='none' stroke='%23FFF4E6' stroke-opacity='0.08' stroke-width='2' d='M38 8 H58 V28 H78 V38 H88 V58 H78 V68 H58 V88 H38 V68 H18 V58 H8 V38 H18 V28 H38 Z'/%3E%3C/svg%3E");
+    background-size: 96px 96px;
+    color: var(--text-on-dark);
+    padding-block: clamp(3.5rem, 7vw, 6.25rem);
+    border-block-end: 2px solid var(--border-strong);
+  }
+
+  .hero-chakana-art {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: -2.5rem;
+    inline-size: clamp(14rem, 34vw, 29rem);
+    block-size: 100%;
+    pointer-events: none;
+    opacity: 0.95;
+
+    svg {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .hero-chakana-art {
+      opacity: 0.24;
+      inset-inline-end: -5rem;
+    }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content > * {
+    max-inline-size: 46rem;
+  }
+
+  .hero-eyebrow {
+    margin-block-end: 1.25rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 1.35rem + 4.2vw, 5.2rem);
+    font-weight: 800;
+    line-height: 0.98;
+    color: var(--brand-cream);
+    margin-block-end: 1.25rem;
+  }
+
+  .hero-institution {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.55rem);
+    font-weight: 700;
+    color: var(--brand-yellow);
+    margin-block-end: 0.85rem;
+    max-inline-size: 40ch;
+  }
+
+  .hero-lead {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+    color: var(--brand-cream);
+    max-inline-size: 58ch;
+    margin-block-end: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-block-end: 2.25rem;
+  }
+
+  .hero-origin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--brand-cream);
+
+    .pin-icon {
+      flex-shrink: 0;
+      color: var(--brand-cream);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Section Headers & Subtle Page-1 Corner Step Accents
+     ------------------------------------------------------------------------ */
+  .corner-step {
+    position: absolute;
+    inline-size: 3.75rem;
+    block-size: 3.75rem;
+    pointer-events: none;
+    display: none;
+  }
+
+  @media (min-width: 68rem) {
+    .corner-step {
+      display: block;
+      inline-size: 4.5rem;
+      block-size: 4.5rem;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .corner-step--tl {
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%238CC63F' fill-rule='evenodd' d='M0 0 H90 V30 H60 V60 H30 V90 H0 Z M15 8 A7 7 0 1 0 15 22 A7 7 0 1 0 15 8 Z'/%3E%3C/svg%3E");
+    }
+
+    .corner-step--tr {
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%232540D9' fill-rule='evenodd' d='M0 0 H90 V90 H60 V60 H30 V30 H0 Z M75 8 A7 7 0 1 0 75 22 A7 7 0 1 0 75 8 Z'/%3E%3C/svg%3E");
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    max-inline-size: 46rem;
+    margin-inline: auto;
+    margin-block-end: clamp(2rem, 4vw, 3rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 1.35rem + 2.1vw, 3.1rem);
+    font-weight: 800;
+    color: var(--brand-ink);
+    margin-block: 0.9rem 0.85rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-inline-size: 62ch;
+    margin-inline: auto;
+  }
+
+  .section-desc--left {
+    margin-inline: 0;
+  }
+
+  /* ------------------------------------------------------------------------
+     Flagship Spotlight Card: Sur en Precios (Cobalt Blue + Yellow Page 4)
+     ------------------------------------------------------------------------ */
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-spotlight);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88' viewBox='0 0 88 88'%3E%3Cpath fill='none' stroke='%23FFF4E6' stroke-opacity='0.07' stroke-width='2' d='M34 8 H54 V24 H70 V34 H80 V54 H70 V64 H54 V80 H34 V64 H18 V54 H8 V34 H18 V24 H34 Z'/%3E%3C/svg%3E");
+    color: var(--brand-cream);
+    border: 2px solid var(--brand-ink);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.75rem, 4vw, 3rem);
+    box-shadow: 0 6px 0 var(--brand-ink);
+    margin-block-end: clamp(2.5rem, 4.5vw, 3.5rem);
+  }
+
+  .spotlight-chakana {
+    position: absolute;
+    inset-block-end: -2rem;
+    inset-inline-end: -2rem;
+    inline-size: clamp(12rem, 24vw, 20rem);
+    pointer-events: none;
+    opacity: 0.88;
+  }
+
+  @media (max-width: 48rem) {
+    .spotlight-chakana {
+      opacity: 0.22;
+    }
+  }
+
+  .spotlight-body {
+    position: relative;
+    z-index: 1;
+    max-inline-size: 46rem;
+  }
+
+  .spotlight-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block-end: 1rem;
+  }
+
+  .spotlight-domain {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--brand-cream);
+    letter-spacing: 0.01em;
+  }
+
+  .spotlight-title {
+    font-size: clamp(2rem, 1.4rem + 2.5vw, 3.4rem);
+    font-weight: 800;
+    color: var(--brand-cream);
+    margin-block-end: 0.9rem;
+  }
+
+  .spotlight-desc {
+    font-size: 1.05rem;
+    color: var(--brand-cream);
+    max-inline-size: 62ch;
+    margin-block-end: 1.35rem;
+  }
+
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin-block: 0 1.75rem;
+
+    li {
+      padding-block: 0.3rem;
+      padding-inline: 0.8rem;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid color-mix(in oklab, var(--brand-cream) 55%, transparent);
+      background-color: color-mix(in oklab, var(--brand-ink) 22%, transparent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--brand-cream);
+    }
+  }
+
+  .spotlight-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  /* ------------------------------------------------------------------------
+     Sub-section & Adaptive Tool Cards (modern-web-guidance: card + subgrid)
+     ------------------------------------------------------------------------ */
+  .sub-section-head {
+    margin-block-end: 1.5rem;
+  }
+
+  .sub-section-title {
+    font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.85rem);
+    font-weight: 800;
+    color: var(--brand-ink);
+    margin-block-end: 0.35rem;
+  }
+
+  .sub-section-desc {
+    color: var(--text-muted);
+    max-inline-size: 64ch;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 1.5rem;
+  }
+
+  .card.tool-card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    background-color: var(--surface-card);
+    border: 2px solid var(--brand-ink);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+    &:has(a.card-link) {
+      position: relative;
+
+      a:not(.card-link),
+      button {
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    &:has(a.card-link:hover) {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    &:has(a.card-link:focus-visible) {
+      outline: 3px solid var(--brand-orange);
+      outline-offset: 4px;
+      transform: translateY(-2px);
+    }
+
+    > .card-banner {
+      grid-row: 1;
+      inline-size: 100%;
+      block-size: 7.5rem;
+      border-block-end: 2px solid var(--brand-ink);
+    }
+
+    > header {
+      grid-row: 2;
+      padding-block: 1.25rem 0.65rem;
+      padding-inline: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
+
+      h3 {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--brand-ink);
+      }
+    }
+
+    a.card-link {
+      color: inherit;
+      text-decoration: none;
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+    }
+
+    > p {
+      grid-row: 3;
+      padding-block: 0 1.25rem;
+      padding-inline: 1.35rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    > footer {
+      grid-row: 4;
+      padding-block: 0.9rem 1.15rem;
+      padding-inline: 1.35rem;
+      border-block-start: 1.5px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      background-color: color-mix(in oklab, var(--brand-cream) 55%, var(--brand-white));
+    }
+
+    .card-cta {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--brand-blue);
+    }
+
+    .card-host {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @supports (grid-template-rows: subgrid) {
+    .card.tool-card {
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Research Axes Grid (Color-blocked editorial cards echoing Pages 5-8)
+     ------------------------------------------------------------------------ */
+  .axes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+    gap: 1.25rem;
+  }
+
+  .axis-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.5rem;
+    border: 2px solid var(--brand-ink);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+
+    .axis-badge {
+      align-self: flex-start;
+      padding-block: 0.22rem;
+      padding-inline: 0.7rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      background-color: var(--brand-ink);
+      color: var(--brand-cream);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  .axis-card--yellow {
+    background-color: var(--brand-yellow);
+    color: var(--brand-ink);
+  }
+
+  .axis-card--green {
+    background-color: var(--brand-green);
+    color: var(--brand-ink);
+  }
+
+  .axis-card--orange {
+    background-color: var(--brand-orange);
+    color: var(--brand-ink);
+  }
+
+  .axis-card--blue {
+    background-color: var(--brand-blue);
+    color: var(--brand-cream);
+
+    .axis-badge {
+      background-color: var(--brand-yellow);
+      color: var(--brand-ink);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Institutional Section (Circular Seal + 3 Pillars + Collaboration Aside)
+     ------------------------------------------------------------------------ */
+  .institutional-intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    margin-block-end: 2.5rem;
+  }
+
+  @media (max-width: 48rem) {
+    .institutional-intro {
+      grid-template-columns: 1fr;
+    }
+
+    .seal-figure {
+      justify-self: center;
+    }
+  }
+
+  .seal-figure img {
+    inline-size: clamp(9.5rem, 16vw, 13rem);
+    block-size: auto;
+  }
+
+  .inst-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 1.5rem;
+    margin-block-end: 2rem;
+  }
+
+  .inst-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.65rem;
+    background-color: var(--surface-card);
+    border: 2px solid var(--brand-ink);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+
+    .inst-kicker {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--brand-violet-deep);
+      letter-spacing: 0.02em;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--brand-ink);
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+  }
+
+  .inst-facts {
+    display: grid;
+    gap: 0.55rem;
+    padding-block-start: 0.9rem;
+    border-block-start: 1.5px solid var(--border-subtle);
+    font-size: 0.88rem;
+
+    dt {
+      font-weight: 700;
+      color: var(--brand-ink);
+    }
+
+    dd {
+      color: var(--text-muted);
+    }
+  }
+
+  .collab-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    background-color: var(--surface-tinted);
+    border: 2px solid var(--brand-ink);
+    border-radius: var(--radius-md);
+
+    .collab-copy {
+      max-inline-size: 44rem;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-block-end: 0.45rem;
+      }
+
+      p {
+        font-size: 0.96rem;
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Site Footer (Deep Ink #14122B + Cream Text + Yellow Section Headings)
+     ------------------------------------------------------------------------ */
+  .site-footer {
+    background-color: var(--surface-footer);
+    color: var(--text-on-dark);
+    padding-block: clamp(3rem, 5vw, 4.5rem) 2rem;
+    border-block-start: 6px solid var(--brand-orange);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+    gap: 2.25rem;
+  }
+
+  @media (max-width: 60rem) {
+    .footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-lockup {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block-end: 1rem;
+
+    .brand-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--brand-cream);
+    }
+
+    .brand-faculty {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--text-on-dark-muted);
+    }
+  }
+
+  .footer-mission {
+    font-size: 0.93rem;
+    color: var(--text-on-dark-muted);
+    max-inline-size: 38ch;
+    margin-block-end: 1rem;
+  }
+
+  .footer-origin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--brand-yellow);
+  }
+
+  .footer-heading {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--brand-yellow);
+    margin-block-end: 0.9rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+
+    a {
+      display: inline-block;
+      min-block-size: 1.75rem;
+      color: var(--brand-cream);
+      font-size: 0.93rem;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        color: var(--brand-yellow);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer-address p {
+    font-size: 0.92rem;
+    color: var(--text-on-dark-muted);
+    margin-block-end: 0.85rem;
+  }
+
+  .footer-bottom {
+    margin-block-start: 2.75rem;
+    padding-block-start: 1.5rem;
+    border-block-start: 1px solid color-mix(in oklab, var(--brand-cream) 18%, transparent);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-on-dark-muted);
+  }
+
+  .footer-domain {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--brand-yellow);
+  }
+}
+
+/* ==========================================================================
+   6. Utilities, Accessibility & System Preferences
+   ========================================================================== */
+@layer utilities {
+  /* Visually hidden utility keeping focusable skip-links visible on focus */
+  .visually-hidden:where(:not(:focus-within, :active)) {
+    position: absolute !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  @media (pointer: coarse) {
+    .btn,
+    .site-header .menu-button,
+    .footer-links a {
+      min-block-size: 2.75rem;
+    }
+
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .site-header .brand-mark,
+    .site-header .site-menu,
+    .btn,
+    .card.tool-card {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .site-header,
+    .spotlight-card,
+    .card.tool-card,
+    .axis-card,
+    .inst-card,
+    .collab-banner,
+    .btn,
+    .pill {
+      border: 2px solid CanvasText;
+      box-shadow: none;
+    }
+
+    .site-header .site-menu a[aria-current="page"] {
+      border-color: Highlight;
+      outline: 2px solid Highlight;
+    }
+
+    .hero-band,
+    .spotlight-card {
+      background-image: none;
+    }
+
+    .hero-chakana-art,
+    .spotlight-chakana,
+    .corner-step {
+      display: none;
+    }
+  }
+}
